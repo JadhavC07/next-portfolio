@@ -29,6 +29,7 @@ export default function RootLayout({ children }) {
           name="description"
           content="Chandan Jadhav, a Full Stack Developer specializing in React.js, Java, Spring Boot, and MySQL."
         />
+        <meta name="google-site-verification" content="98AETzaZPiZuBP5F5fg30zu6V08Q5O-Is9Bj5IEPrPE" />
 
         <script
           type="application/ld+json"
