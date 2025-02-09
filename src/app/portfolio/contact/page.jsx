@@ -3,7 +3,15 @@ import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Mail, User, Send, MessageSquare, Sparkles, ArrowRight, Loader2 } from "lucide-react";
+import {
+  Mail,
+  User,
+  Send,
+  MessageSquare,
+  Sparkles,
+  ArrowRight,
+  Loader2,
+} from "lucide-react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -70,7 +78,8 @@ const Contact = () => {
             Let&apos;s Connect
           </h1>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Ready to bring your ideas to life? Let's create something extraordinary together.
+            Ready to bring your ideas to life? Let&apos;s create something
+            extraordinary together.
           </p>
         </div>
 
@@ -83,7 +92,8 @@ const Contact = () => {
                   Send Me a Message
                 </h2>
                 <p className="text-gray-600 dark:text-gray-400">
-                  Fill out the form below and I'll get back to you as soon as possible.
+                  Fill out the form below and I&apos;ll get back to you as soon
+                  as possible.
                 </p>
               </div>
 
@@ -100,9 +110,11 @@ const Contact = () => {
                       onChange={handleChange}
                       className={`w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-lg pl-10 
                         border transition-colors duration-200
-                        ${errors.name 
-                          ? 'border-red-500 dark:border-red-500' 
-                          : 'border-gray-200 dark:border-gray-700 focus:border-lime-500 dark:focus:border-lime-500'}
+                        ${
+                          errors.name
+                            ? "border-red-500 dark:border-red-500"
+                            : "border-gray-200 dark:border-gray-700 focus:border-lime-500 dark:focus:border-lime-500"
+                        }
                         text-gray-800 dark:text-gray-200`}
                     />
                     <User className="w-5 h-5 absolute left-3 top-3 text-gray-400" />
@@ -124,9 +136,11 @@ const Contact = () => {
                       onChange={handleChange}
                       className={`w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-lg pl-10 
                         border transition-colors duration-200
-                        ${errors.email 
-                          ? 'border-red-500 dark:border-red-500' 
-                          : 'border-gray-200 dark:border-gray-700 focus:border-lime-500 dark:focus:border-lime-500'}
+                        ${
+                          errors.email
+                            ? "border-red-500 dark:border-red-500"
+                            : "border-gray-200 dark:border-gray-700 focus:border-lime-500 dark:focus:border-lime-500"
+                        }
                         text-gray-800 dark:text-gray-200`}
                     />
                     <Mail className="w-5 h-5 absolute left-3 top-3 text-gray-400" />
@@ -148,15 +162,19 @@ const Contact = () => {
                       onChange={handleChange}
                       className={`w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-lg pl-10 
                         border transition-colors duration-200
-                        ${errors.subject 
-                          ? 'border-red-500 dark:border-red-500' 
-                          : 'border-gray-200 dark:border-gray-700 focus:border-lime-500 dark:focus:border-lime-500'}
+                        ${
+                          errors.subject
+                            ? "border-red-500 dark:border-red-500"
+                            : "border-gray-200 dark:border-gray-700 focus:border-lime-500 dark:focus:border-lime-500"
+                        }
                         text-gray-800 dark:text-gray-200`}
                     />
                     <MessageSquare className="w-5 h-5 absolute left-3 top-3 text-gray-400" />
                   </div>
                   {errors.subject && (
-                    <p className="text-red-500 text-sm mt-1">{errors.subject}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.subject}
+                    </p>
                   )}
                 </div>
 
@@ -171,13 +189,17 @@ const Contact = () => {
                     rows="4"
                     className={`w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-lg 
                       border transition-colors duration-200
-                      ${errors.message 
-                        ? 'border-red-500 dark:border-red-500' 
-                        : 'border-gray-200 dark:border-gray-700 focus:border-lime-500 dark:focus:border-lime-500'}
+                      ${
+                        errors.message
+                          ? "border-red-500 dark:border-red-500"
+                          : "border-gray-200 dark:border-gray-700 focus:border-lime-500 dark:focus:border-lime-500"
+                      }
                       text-gray-800 dark:text-gray-200`}
                   ></textarea>
                   {errors.message && (
-                    <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.message}
+                    </p>
                   )}
                 </div>
 
@@ -215,7 +237,10 @@ const Contact = () => {
                     Let&apos;s Build Something Amazing Together!
                   </h2>
                   <p className="text-lime-50 mb-8 leading-relaxed">
-                    Whether you have a groundbreaking idea, need technical expertise, or just want to explore possibilities, I'm here to help turn your vision into reality. Let's create innovative solutions that make a difference.
+                    Whether you have a groundbreaking idea, need technical
+                    expertise, or just want to explore possibilities, I&apos;m
+                    here to help turn your vision into reality. Let&apos;s
+                    create innovative solutions that make a difference.
                   </p>
 
                   <div className="space-y-6">
@@ -223,7 +248,9 @@ const Contact = () => {
                       <Mail className="w-6 h-6" />
                       <div>
                         <p className="font-medium">Email Me At</p>
-                        <p className="group-hover:underline">contact@yourdomain.com</p>
+                        <p className="group-hover:underline">
+                          contact@yourdomain.com
+                        </p>
                       </div>
                       <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all" />
                     </div>
@@ -232,7 +259,8 @@ const Contact = () => {
 
                 <div className="mt-12">
                   <p className="text-sm text-lime-50">
-                    Available for freelance opportunities, full-time positions, and collaborative projects.
+                    Available for freelance opportunities, full-time positions,
+                    and collaborative projects.
                   </p>
                 </div>
               </div>
