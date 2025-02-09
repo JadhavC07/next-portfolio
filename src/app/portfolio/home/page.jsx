@@ -2,6 +2,7 @@
 import { TypeAnimation } from "react-type-animation";
 import { useEffect } from "react";
 import Aos from "aos";
+import Image from "next/image";
 
 const Home = () => {
   useEffect(() => {
@@ -44,9 +45,10 @@ const Home = () => {
           </h2>
 
           <div className="w-48 h-58 mx-auto rounded-full overflow-hidden">
-            <img
+            <Image
               className="w-full h-full object-cover"
-              style={{ width: "210px" }}
+              width={201}
+              height={210}
               src="/Images/my-prop.svg"
               alt="Profile"
             />

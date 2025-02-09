@@ -13,7 +13,6 @@ const Home = () => {
 
   return (
     <>
-      
       <header className="flex justify-center py-12 bg-white dark:bg-gray-950">
         <div className="text-center p-20">
           <h1 className="text-5xl font-bold text-lime-500">
@@ -48,7 +47,8 @@ const Home = () => {
           <figure className="w-48 h-58 mx-auto rounded-full overflow-hidden">
             <Image
               className="w-full h-full object-cover"
-              style={{ width: "210px" }}
+              width={210}
+              height={210}
               src="/Images/my-prop.svg"
               alt="Chandan Jadhav Full Stack Developer Profile Picture"
               loading="lazy"
@@ -57,7 +57,6 @@ const Home = () => {
         </div>
       </header>
 
-  
       <main className="dark:bg-gray-950">
         <div className="container mx-auto text-center">
           <div className="inline-block relative" style={{ maxWidth: "860px" }}>
@@ -65,11 +64,12 @@ const Home = () => {
               src="/Images/my-pc.svg"
               alt="Chandan Jadhav Full Stack Developer Work Setup"
               loading="lazy"
+              width={200}
+              height={200}
             />
           </div>
         </div>
       </main>
-
 
       <section
         className="text-black text-center py-16"
@@ -82,7 +82,8 @@ const Home = () => {
                 Hi, I’m Chandan. Nice to meet you.
               </h2>
               <p className="text-xl md:text-xl font-medium">
-                With 6 months of internship experience and now serving as a junior software developer...
+                With 6 months of internship experience and now serving as a
+                junior software developer...
               </p>
             </div>
           </article>

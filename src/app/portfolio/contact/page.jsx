@@ -3,7 +3,8 @@ import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { FaEnvelope } from "react-icons/fa";
+import { Mail, User, Send, MessageSquare, Sparkles, ArrowRight, Loader2 } from "lucide-react";
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -13,6 +14,7 @@ const Contact = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,11 +24,10 @@ const Contact = () => {
 
   const validateForm = () => {
     const newErrors = {};
-
     if (!formData.name.trim()) newErrors.name = "Name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
     else if (!/\S+@\S+\.\S+/.test(formData.email))
-      newErrors.email = "Email is invalid";
+      newErrors.email = "Please enter a valid email";
     if (!formData.subject.trim()) newErrors.subject = "Subject is required";
     if (!formData.message.trim()) newErrors.message = "Message is required";
 
@@ -36,8 +37,8 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (validateForm()) {
+      setIsSubmitting(true);
       try {
         await emailjs.send(
           "service_7d96cjr",
@@ -46,133 +47,200 @@ const Contact = () => {
           "3g7fmoqhPZJraRgJ4"
         );
         setFormData({ name: "", email: "", subject: "", message: "" });
-        toast.success("Form sent successfully", { position: "top-center" });
+        toast.success("Message sent successfully! I'll get back to you soon.", {
+          position: "top-center",
+          className: "bg-emerald-50 dark:bg-emerald-900",
+        });
       } catch (error) {
-        toast.error("Error submitting form", { position: "top-center" });
+        toast.error("Oops! Something went wrong. Please try again.", {
+          position: "top-center",
+        });
         console.error("Error submitting form:", error);
+      } finally {
+        setIsSubmitting(false);
       }
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-950 flex justify-center items-center p-4">
-      <div className="bg-white dark:bg-gray-900 p-8 rounded-lg border dark:border-lime-500 shadow-lg w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Left Side - Contact Form */}
-        <div className="flex flex-col">
-          <h2 className="text-2xl dark:text-white text-lime-400 font-semibold mb-4">
-            Contact Me
-          </h2>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label
-                htmlFor="name"
-                className="block text-gray-600 dark:text-white font-medium mb-2"
-              >
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className={`w-full px-4 py-2 border rounded-md focus:outline-none ${
-                  errors.name && "border-red-500"
-                }`}
-              />
-              {errors.name && (
-                <p className="text-red-500 text-sm mt-1">{errors.name}</p>
-              )}
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="email"
-                className="block text-gray-600 dark:text-white font-medium mb-2"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className={`w-full px-4 py-2 border rounded-md focus:outline-none ${
-                  errors.email && "border-red-500"
-                }`}
-              />
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-              )}
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="subject"
-                className="block text-gray-600 dark:text-white font-medium mb-2"
-              >
-                Subject
-              </label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                className={`w-full px-4 py-2 border rounded-md focus:outline-none ${
-                  errors.subject && "border-red-500"
-                }`}
-              />
-              {errors.subject && (
-                <p className="text-red-500 text-sm mt-1">{errors.subject}</p>
-              )}
-            </div>
-            <div className="mb-6">
-              <label
-                htmlFor="message"
-                className="block text-gray-600 dark:text-white font-medium mb-2"
-              >
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                rows="4"
-                className={`w-full px-4 py-2 border rounded-md focus:outline-none ${
-                  errors.message && "border-red-500"
-                }`}
-              ></textarea>
-              {errors.message && (
-                <p className="text-red-500 text-sm mt-1">{errors.message}</p>
-              )}
-            </div>
-            <div className="flex justify-end">
-              <button
-                type="submit"
-                className="px-6 py-2 bg-lime-500 dark:bg-lime-500 text-white rounded-md hover:bg-lime-700 focus:outline-none"
-              >
-                Submit
-              </button>
-            </div>
-          </form>
-          <ToastContainer />
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 py-16 px-4">
+      <div className="container mx-auto max-w-6xl">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-lime-500 to-emerald-500 text-transparent bg-clip-text mb-4">
+            Let&apos;s Connect
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Ready to bring your ideas to life? Let's create something extraordinary together.
+          </p>
         </div>
 
-        {/* Right Side - Image/ Icon */}
-<div className="flex flex-col justify-center items-center text-center space-y-4">
-  <FaEnvelope className="text-8xl text-lime-500 dark:text-lime-400" />
-  
-  <h1 className="text-2xl font-bold dark:text-white text-lime-400">
-    Let&apos;s Build Something Amazing Together!
-  </h1>
-  
-  <p className="text-gray-600 dark:text-gray-300 max-w-md">
-    Got a project in mind or just want to connect? Whether you need a full-stack solution, collaboration on a challenging tech project, or have any questions about my work, I’m here to help. Feel free to drop me a message, and I’ll get back to you as soon as possible!
-  </p>
-</div>
+        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            {/* Contact Form Section */}
+            <div className="p-8 lg:p-12">
+              <div className="mb-8">
+                <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-2">
+                  Send Me a Message
+                </h2>
+                <p className="text-gray-600 dark:text-gray-400">
+                  Fill out the form below and I'll get back to you as soon as possible.
+                </p>
+              </div>
 
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="relative">
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">
+                    Name
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-lg pl-10 
+                        border transition-colors duration-200
+                        ${errors.name 
+                          ? 'border-red-500 dark:border-red-500' 
+                          : 'border-gray-200 dark:border-gray-700 focus:border-lime-500 dark:focus:border-lime-500'}
+                        text-gray-800 dark:text-gray-200`}
+                    />
+                    <User className="w-5 h-5 absolute left-3 top-3 text-gray-400" />
+                  </div>
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                  )}
+                </div>
+
+                <div className="relative">
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">
+                    Email
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-lg pl-10 
+                        border transition-colors duration-200
+                        ${errors.email 
+                          ? 'border-red-500 dark:border-red-500' 
+                          : 'border-gray-200 dark:border-gray-700 focus:border-lime-500 dark:focus:border-lime-500'}
+                        text-gray-800 dark:text-gray-200`}
+                    />
+                    <Mail className="w-5 h-5 absolute left-3 top-3 text-gray-400" />
+                  </div>
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
+                </div>
+
+                <div className="relative">
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">
+                    Subject
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-lg pl-10 
+                        border transition-colors duration-200
+                        ${errors.subject 
+                          ? 'border-red-500 dark:border-red-500' 
+                          : 'border-gray-200 dark:border-gray-700 focus:border-lime-500 dark:focus:border-lime-500'}
+                        text-gray-800 dark:text-gray-200`}
+                    />
+                    <MessageSquare className="w-5 h-5 absolute left-3 top-3 text-gray-400" />
+                  </div>
+                  {errors.subject && (
+                    <p className="text-red-500 text-sm mt-1">{errors.subject}</p>
+                  )}
+                </div>
+
+                <div className="relative">
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">
+                    Message
+                  </label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows="4"
+                    className={`w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 rounded-lg 
+                      border transition-colors duration-200
+                      ${errors.message 
+                        ? 'border-red-500 dark:border-red-500' 
+                        : 'border-gray-200 dark:border-gray-700 focus:border-lime-500 dark:focus:border-lime-500'}
+                      text-gray-800 dark:text-gray-200`}
+                  ></textarea>
+                  {errors.message && (
+                    <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-3 px-6 bg-gradient-to-r from-lime-500 to-emerald-500 text-white rounded-lg 
+                    hover:from-lime-600 hover:to-emerald-600 transition-all duration-200 flex items-center justify-center space-x-2
+                    disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      <span>Send Message</span>
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+
+            {/* Info Section */}
+            <div className="relative bg-gradient-to-br from-lime-500 to-emerald-500 p-8 lg:p-12 text-white">
+              <div className="absolute top-0 right-0 p-6">
+                <Sparkles className="w-8 h-8 text-white/20" />
+              </div>
+
+              <div className="relative z-10 h-full flex flex-col justify-between">
+                <div>
+                  <h2 className="text-3xl font-bold mb-6">
+                    Let&apos;s Build Something Amazing Together!
+                  </h2>
+                  <p className="text-lime-50 mb-8 leading-relaxed">
+                    Whether you have a groundbreaking idea, need technical expertise, or just want to explore possibilities, I'm here to help turn your vision into reality. Let's create innovative solutions that make a difference.
+                  </p>
+
+                  <div className="space-y-6">
+                    <div className="flex items-center space-x-4 text-lime-50 hover:text-white transition-colors group cursor-pointer">
+                      <Mail className="w-6 h-6" />
+                      <div>
+                        <p className="font-medium">Email Me At</p>
+                        <p className="group-hover:underline">contact@yourdomain.com</p>
+                      </div>
+                      <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-12">
+                  <p className="text-sm text-lime-50">
+                    Available for freelance opportunities, full-time positions, and collaborative projects.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
