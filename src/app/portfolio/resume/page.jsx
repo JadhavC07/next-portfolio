@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const Resume = () => {
   return (
     <section className="bg-gray-100 dark:bg-gray-950 py-12">
@@ -16,10 +18,12 @@ const Resume = () => {
             </a>
           </div>
 
-          <img
+          <Image
             src="/Resume/Chandan-Jadhav-Resume-a.jpg"
             alt="Resume"
-            className="w-full h-auto"
+            width={800}
+            height={600}
+            layout="responsive"
           />
         </div>
       </div>
